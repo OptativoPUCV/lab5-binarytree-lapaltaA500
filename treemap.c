@@ -36,10 +36,16 @@ TreeNode * createTreeNode(void* key, void * value) {
     return new;
 }
 
-TreeMap * createTreeMap(int (*lower_than) (void* key1, void* key2)) {
+TreeMap * createTreeMap(int (*lower_than) (void* key1, void* key2)) 
+{
+    TreeMap * nuevoMap = (TreeMap *)malloc(sizeof(TreeMap));
+    if (nuevoMap == NULL) return NULL;
 
+    nuevoMap->root = NULL;
+    nuevoMap->current = NULL;
+    nuevoMap->lower_than = lower_than;
+    return nuevoMap;
     //new->lower_than = lower_than;
-    return NULL;
 }
 
 
@@ -50,46 +56,7 @@ void insertTreeMap(TreeMap * tree, void* key, void * value)
     {
         tree->root = createTreeNode(key, value);
         tree->current = tree->root;
-    }
-    else
-    {
-        TreeNode * aux = tree->root;
-        while (aux != NULL)
-        {
-            if (is_equal(tree, key, aux->pair->key)) return;
-            if (tree->lower_than(key, aux->pair->key) == 1)
-            {
-                if (aux->left == NULL)
-                {
-                    aux->left = createTreeNode(key, value);
-                    aux->left->parent = aux;
-                    tree->current = aux->left;
-                    return;
-                }
-                else aux = aux->left;
-                {
-                    if (aux->right == NULL)
-                    {
-                        aux->right = createTreeNode(key, value);
-                        aux->right->parent = aux;
-                        tree->current = aux->right;
-                        return;
-                    }
-                    else aux = aux->right;
-                    {
-                        if (aux->right == NULL)
-                        {
-                            aux->right = createTreeNode(key, value);
-                            aux->right->parent = aux;
-                            tree->current = aux->right;
-                            return;
-                        }
-                    }
-                }
-            }
-        }
-    }
-
+    }    
 }
 
 TreeNode * minimum(TreeNode * x){
