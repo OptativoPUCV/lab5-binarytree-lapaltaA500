@@ -38,7 +38,7 @@ TreeNode * createTreeNode(void* key, void * value) {
 
 TreeMap * createTreeMap(int (*lower_than) (void* key1, void* key2)) 
 {
-    TreeMap * nuevoMap = (TreeMap *)malloc(sizeof(TreeMap));
+    TreeMap *nuevoMap = (TreeMap *)malloc(sizeof(TreeMap));
     if (nuevoMap == NULL) return NULL;
 
     nuevoMap->root = NULL;
@@ -50,7 +50,7 @@ TreeMap * createTreeMap(int (*lower_than) (void* key1, void* key2))
 
 void insertTreeMap(TreeMap * tree, void* key, void * value) 
 {
-    TreeNode * nuevoMap = createTreeNode(key, value);
+    TreeNode *nuevoMap = createTreeNode(key, value);
     if (tree->root == NULL)
     {
         tree->root = nuevoMap;
@@ -58,8 +58,8 @@ void insertTreeMap(TreeMap * tree, void* key, void * value)
         return;
     }
 
-    TreeNode * parent = NULL;
-    TreeNode * raiz = tree->root;
+    TreeNode *parent = NULL;
+    TreeNode *raiz = tree->root;
     while(raiz != NULL)
     {
         parent = raiz;
@@ -99,7 +99,7 @@ void eraseTreeMap(TreeMap * tree, void* key){
 
 Pair * searchTreeMap(TreeMap * tree, void* key) 
 {
-    TreeNode * raiz = tree->root;
+    TreeNode *raiz = tree->root;
     while(raiz != NULL)
     {
         if (is_equal(tree, key, raiz->pair->key) == 1)
@@ -116,9 +116,10 @@ Pair * searchTreeMap(TreeMap * tree, void* key)
 
 Pair * upperBound(TreeMap * tree, void* key) 
 {
+    /*
     if (tree == NULL || tree->root == NULL) return NULL;
-    TreeNode * raiz = tree->root;
-    TreeNode * upperB = NULL;
+    TreeNode *raiz = tree->root;
+    TreeNode *upperB = NULL;
     while(raiz != NULL)
     {
         if (is_equal(tree, key, raiz->pair->key) == 1)
@@ -134,6 +135,7 @@ Pair * upperBound(TreeMap * tree, void* key)
         return upperB->pair;
     }
     else return NULL;
+    */
 }
 
 Pair * firstTreeMap(TreeMap * tree) 
@@ -143,6 +145,14 @@ Pair * firstTreeMap(TreeMap * tree)
     return min->pair;
 }
 
-Pair * nextTreeMap(TreeMap * tree) {
+Pair * nextTreeMap(TreeMap * tree) 
+{
+    TreeNode *current = tree->current;
+    while(current->right != NULL)
+    {
+        current = current->right;
+        
+    }
+    
     return NULL;
 }
